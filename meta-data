@@ -1,0 +1,11 @@
+# This is the meta-data configuration file for cloud-init. Typically this just
+# contains the instance_id. Please refer to the cloud-init documentation for
+# more information:
+#
+# https://cloudinit.readthedocs.io/
+
+instance-id: router-v1
+
+local-hostname: router.lan
+public-keys:
+  - ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAwkU+goCaWAcxugrI5q+1i3ruZ6okc4Iq5eqDcJAjINSTdNwTGBHfCBEitHJA2DqS0PTnusnKi2KsQAn8D44OBykeDPPNs4MzRNRh+cH5nwbf0R3OeHeFZODLCFOiNSKyiErJjbP5u5FJI1jm7PVbIYvcJ/2Taw3/uXrFfEoxOO8ONq6sjKxPoJJK0ixo0mVy5kuzZocjaqNtTW7Ln+YPQU1ytGNqzZqSLwmc5q3gOFFUbSAVKbGRcxJLp8RxJ9mg97ROY02UlqKxTERmVgleA9VYXb2xiJwpyW/0ql7fr/LN2G3I6uEaFsYbGwCKQrFfkd48nisDQHc0MF6tIRMuUw==

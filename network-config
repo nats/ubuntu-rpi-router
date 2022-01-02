@@ -1,0 +1,27 @@
+# This file contains a netplan-compatible configuration which cloud-init
+# will apply on first-boot. Please refer to the cloud-init documentation and
+# the netplan reference for full details:
+#
+# https://cloudinit.readthedocs.io/
+# https://netplan.io/reference
+
+
+# In my testing, eth1 struggles to hit line-rate on TX (lack of hardware offload?)
+# but is fine on RX; while eth0 being the onboard NIC is fine for both.
+# Since NBN is at best 1000/50 , we put NBN on eth1 where the not-quite-linerate TX
+# will have no impact since we cannot TX at higher than 50 anyway.
+# NOTE: viewed from the back, eth1 is on left and eth0 on right
+
+version: 2
+
+ethernets:
+  eth0:
+    optional: true
+    addresses:
+      - 192.168.1.1/24
+    nameservers:
+      search:
+        - lan
+  eth1:
+    dhcp4: true
+    optional: true

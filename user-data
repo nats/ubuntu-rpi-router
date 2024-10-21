@@ -31,13 +31,16 @@ write_files:
       domain=lan
       interface-name=router.lan,eth0
       dhcp-authoritative
-      dhcp-range=192.168.1.11,192.168.1.150,1d
-      # Specific devices on my home network:
-      dhcp-host=C8:CB:B8:CA:E9:87,192.168.1.5,storage
-      dhcp-host=2C:FD:A1:5D:F9:9F,192.168.1.4
-      dhcp-host=8c:16:45:26:d6:3e,192.168.1.3,nathan-x1
-      dhcp-host=f0:9f:c2:70:34:f8,192.168.1.10,ubiquiti
-      dhcp-host=3C:7C:3F:28:9B:85,192.168.1.6,ncase
+      dhcp-range=192.168.10.11,192.168.10.150,1d
+      dhcp-host=C8:CB:B8:CA:E9:87,192.168.10.5,storage
+      dhcp-host=2C:FD:A1:5D:F9:9F,192.168.10.4
+      dhcp-host=8c:16:45:26:d6:3e,192.168.10.3,nathan-x1
+      dhcp-host=f0:9f:c2:70:34:f8,192.168.10.10,ubiquiti
+      dhcp-host=3C:7C:3F:28:9B:85,192.168.10.6,ncase
+      dhcp-host=d0:21:f9:68:76:35,192.168.10.201,u6-pro
+      dhcp-host=78:45:58:e3:27:fd,192.168.10.202,u6-lr
+      dhcp-host=78:45:58:c9:f4:be,192.168.10.203,uap-flexhd
+      dhcp-host=d0:21:f9:b7:7b:10,192.168.10.204,u6-lite
 
   - path: /etc/iptables/rules.v4
     content: |
@@ -45,8 +48,7 @@ write_files:
       -A POSTROUTING -p tcp --tcp-flags SYN,RST SYN -o wg0 -j TCPMSS --clamp-mss-to-pmtu
       COMMIT
       *nat
-      #-A PREROUTING -i eth1 -p tcp --dport 389 -j DNAT --to 192.168.1.6:3389
-      -A POSTROUTING -s 192.168.1.0/24 -o eth1 -j MASQUERADE
+      -A POSTROUTING -s 192.168.10.0/24 -o eth1 -j MASQUERADE
       COMMIT
       *filter
       :INPUT DROP
@@ -56,7 +58,6 @@ write_files:
       -A INPUT -i eth0 -j ACCEPT
       -A INPUT -p tcp --dport ssh -j ACCEPT
       -A INPUT -p icmp -j ACCEPT
-      #-A INPUT -i eth1 -p tcp --dport 389 -j ACCEPT
       -A FORWARD -i eth0 -j ACCEPT
       -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
       -A FORWARD -i eth1 -m conntrack --ctstate DNAT -j ACCEPT

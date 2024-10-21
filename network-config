@@ -18,10 +18,28 @@ ethernets:
   eth0:
     optional: true
     addresses:
-      - 192.168.1.1/24
+      - 192.168.10.1/24
     nameservers:
       search:
         - lan
   eth1:
-    dhcp4: true
     optional: true
+    dhcp4: true
+    dhcp4-overrides:
+      use-dns: false
+      route-metric: 100
+    nameservers:
+      addresses:
+        - 8.8.8.8
+        - 8.8.4.4
+
+  eth2:
+    optional: true
+    dhcp4: true
+    dhcp4-overrides:
+      use-dns: false
+      route-metric: 200
+    nameservers:
+      addresses:
+        - 8.8.8.8
+        - 8.8.4.4
